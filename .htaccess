@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Rewrite root to www
+    RewriteRule ^$ /www/index.php [L]
+
+    # Rewrite clean URLs to PHP files in www subdirectory
+    RewriteCond %{REQUEST_URI} !^/www/
+    RewriteCond %{DOCUMENT_ROOT}/www%{REQUEST_URI}.php -f
+    RewriteRule ^(.*)$ /www/$1.php [L]
+
+    # Redirect directory URLs to their index.php file
+    RewriteCond %{DOCUMENT_ROOT}/www%{REQUEST_URI} -d
+    RewriteRule ^(.+?)/?$ /www/$1/index.php [L]
+
+    # Return 404 error if file does not exist
+    RewriteCond %{REQUEST_URI} !^/www/
+    RewriteCond %{DOCUMENT_ROOT}/www%{REQUEST_URI} !-f
+    RewriteRule ^(.*)$ /www/404.php [L]
+
+    # Rewrite all other requests to www subdirectory
+    RewriteCond %{REQUEST_URI} !^/www/
+    RewriteRule ^(.*)$ /www/$1 [L]
+
+
+</IfModule>
