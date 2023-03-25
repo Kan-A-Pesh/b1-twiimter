@@ -15,11 +15,13 @@
     RewriteRule ^(.+?)/?$ /www/$1/index.php [L]
 
     # Return 404 error if file does not exist
+    RewriteCond %{REQUEST_URI} !^/media/
     RewriteCond %{REQUEST_URI} !^/www/
     RewriteCond %{DOCUMENT_ROOT}/www%{REQUEST_URI} !-f
     RewriteRule ^(.*)$ /www/404.php [L]
 
     # Rewrite all other requests to www subdirectory
+    RewriteCond %{REQUEST_URI} !^/media/
     RewriteCond %{REQUEST_URI} !^/www/
     RewriteRule ^(.*)$ /www/$1 [L]
 

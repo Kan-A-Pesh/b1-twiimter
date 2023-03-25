@@ -9,7 +9,7 @@
 <meta http-equiv='Cache-Control' content='no-cache'>
 
 <meta name='og:title' content='Twiimter'>
-<meta name='og:image' content='https://i.pinimg.com/originals/b3/da/ac/b3daac6815ebf1516a545db6c3e40a36.jpg'>
+<meta name='og:image' content='/img/icon.png'>
 <meta name='og:site_name' content='Twiimter'>
 <meta name='og:description' content='Découvrez TWIIMTER! Un réseau social fait dans le cadre scolaire.'>
 
@@ -21,7 +21,9 @@
 
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 
-<link href='https://i.pinimg.com/originals/b3/da/ac/b3daac6815ebf1516a545db6c3e40a36.jpg' rel='apple-touch-icon' type='image/png'>
-<link rel='shortcut icon' type='image/png' href='https://i.pinimg.com/originals/b3/da/ac/b3daac6815ebf1516a545db6c3e40a36.jpg'>
+<link href='/img/icon.png' rel='apple-touch-icon' type='image/png'>
+<link rel='shortcut icon' type='image/png' href='/img/icon.png'>
 
-<title>Twiimter</title>
+<title>Hawk out</title>
+
+<link rel="stylesheet" href="/css/root.css">

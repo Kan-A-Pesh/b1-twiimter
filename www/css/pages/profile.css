@@ -1,0 +1,65 @@
+.error {
+    text-align: center;
+    margin-top: 150px;
+    opacity: .3;
+}
+
+.banner {
+    height: 35vh;
+    display: flex;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: -75px;
+    margin-bottom: 16px;
+}
+
+.avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.info h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.info h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    opacity: 0.5;
+}
+
+.info .button {
+    text-decoration: none;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.bio {
+    padding: 16px;
+}
+
+.bio p {
+    font-size: 1rem;
+    font-weight: 500;
+}

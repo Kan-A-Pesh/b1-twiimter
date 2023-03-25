@@ -11,16 +11,17 @@ Il utilise une base de données MySQL et est hébergé sur un serveur Apache.
 
 ## 📝 Fonctionnalités
 
-- [ ] Créer un compte
-- [ ] Se connecter
-- [ ] Se déconnecter
+- [x] Créer un compte
+- [x] Se connecter
+- [x] Se déconnecter
 - [ ] Modifier son profil
-- [ ] Voir un profil
+- [x] Voir un profil
 - [ ] Voir la liste des utilisateurs
 - [ ] Voir les tweets
 - [ ] Ajouter un tweet
 - [ ] Supprimer un tweet
 - [ ] Rechercher un tweet
+- [ ] Séparer les actions dans des pages différentes (delete.php, edit.php, etc.)
 
 ## ⚡️ Installation
 

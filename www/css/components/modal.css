@@ -1,0 +1,12 @@
+.modal {
+    width: clamp(300px, 70%, 90vw);
+    background-color: #fff8;
+    backdrop-filter: blur(20px);
+    padding: 32px;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}

@@ -1,0 +1,41 @@
+a {
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+input#banner {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-bottom: 32px;
+}
+
+.avatar {
+    margin-top: 0;
+    margin-bottom: 32px;
+}
+
+.avatar input {
+    align-self: center;
+}
+
+.info > div {
+    width: calc(100% - 32px);
+}
+
+.confirm-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 32px;
+}
+
+.confirm-group * {
+    flex-grow: 1;
+    text-align: center;
+}

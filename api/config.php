@@ -1,6 +1,6 @@
 <?php
 
-$MYSQL_HOST = "127.0.0.1";
+$MYSQL_HOST = "mysql"; # Docker container name
 $MYSQL_PORT = 3306;
 $MYSQL_USER = "twiimter";
 $MYSQL_PASS = "twiimter";

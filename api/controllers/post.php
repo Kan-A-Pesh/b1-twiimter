@@ -112,6 +112,7 @@ class Post
      * @param ?boolean $hasMedia Whether to get posts with/without media (null for all posts)
      * @param integer $limit The maximum number of posts to get
      * @param integer $offset The offset of the posts to get
+     * @param boolean $orderDesc Whether to order the posts in descending order
      * @return Post[]|integer The posts or an error code
      */
     public static function get_all(
@@ -121,7 +122,8 @@ class Post
         ?string $replyTo = null,
         ?bool $hasMedia = null,
         int $limit = 25,
-        int $offset = 0
+        int $offset = 0,
+        bool $orderDesc = true
     ): array|int {
         global $MYSQL_POST_TABLE;
 
@@ -149,7 +151,7 @@ class Post
                 AND (:excludeUsers IS NULL OR FK_author_handle != :excludeUsers)
                 $replyToQuery
                 AND (:hasMedia IS NULL OR media_list_paths $hasMedia LIKE '')
-                ORDER BY created_at DESC
+                ORDER BY created_at " . ($orderDesc ? "DESC" : "ASC") . "
                 LIMIT :limit OFFSET :offset"
             );
 

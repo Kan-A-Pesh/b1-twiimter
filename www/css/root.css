@@ -1,0 +1,26 @@
+@import url("/css/fonts.css");
+@import url("/css/components/navbar.css");
+@import url("/css/components/inputs.css");
+@import url("/css/components/modal.css");
+
+:root {
+    --primary: #25ca2d;
+    --secondary: #158628;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+}

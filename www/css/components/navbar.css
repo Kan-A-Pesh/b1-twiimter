@@ -1,0 +1,39 @@
+nav {
+    background-color: #C4C4C4C4;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.buttons a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 1px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background-size: 200%;
+    background-position: 100% 0%;
+    background-image: linear-gradient(
+        to right,
+        black 0%,
+        black 50%,
+        transparent 50%,
+        transparent 100%
+    );
+}
+
+.buttons a:hover {
+    color: #ffffff;
+    background-position: 0% 0%;
+}

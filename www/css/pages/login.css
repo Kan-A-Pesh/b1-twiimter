@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/img/pearl.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: sepia(1) hue-rotate(105deg) saturate(1.5) brightness(.4) blur(10px);
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+}
