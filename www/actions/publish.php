@@ -17,9 +17,9 @@ if (strlen($_POST['content']) > 500)
     dieError('Your content is too long');
 
 $media_list = [];
-if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
-    $file_base64 = base64_encode(file_get_contents($_FILES['file']["tmp_name"]));
-    $file_ext = pathinfo($_FILES['file']["name"], PATHINFO_EXTENSION);
+if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
+    $file_base64 = base64_encode(file_get_contents($_FILES['image_file']["tmp_name"]));
+    $file_ext = pathinfo($_FILES['image_file']["name"], PATHINFO_EXTENSION);
     $file_base64 = "data:image/$file_ext;base64,$file_base64";
 
     $file_media = new Media($file_base64, $file_ext);

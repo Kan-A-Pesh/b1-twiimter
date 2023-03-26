@@ -77,6 +77,8 @@ if (!empty($_GET["u"])) {
         }
         ?>
     </div>
+
+    <?php include __DIR__ . '/../templates/forms/postform.php'; ?>
 </body>
 
 </html>

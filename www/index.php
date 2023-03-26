@@ -12,7 +12,7 @@
     <?php include __DIR__ . '/../templates/navbar/navbar.php';
 
     $query = $_GET["q"] ?? null;
-    $reply = $_GET["reply"] ?? null;
+    $reply = $_GET["reply"] ?? "none";
     $order = ($_GET["order"] ?? "desc") == "desc" ? true : false;
 
     ?>
@@ -53,7 +53,7 @@
     } else if (count($posts) == 0) {
         echo "<h1 class='error'>No posts found</h1>";
     } else {
-        if ($reply !== null) {
+        if ($reply !== "none") {
             $post = Post::get($reply);
 
             if ($post === 500)

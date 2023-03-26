@@ -5,7 +5,7 @@
     </div>
 
     <div class="post-form hidden">
-        <form action="/actions/publish.php" method="POST">
+        <form action="/actions/publish.php" method="POST" enctype="multipart/form-data">
             <div class="modal">
                 <input type="hidden" name="action" value="publish" />
                 <input type="hidden" name="reply-id" value="" id="reply-id" />
@@ -16,7 +16,7 @@
 
                 <div class="input-group">
                     <label for="file">Add an image:</label>
-                    <input type="file" name="file" id="file" />
+                    <input type="file" name="image_file" id="image_file" accept="image/*" />
                 </div>
 
                 <div class="submit-group">
