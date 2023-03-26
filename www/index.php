@@ -9,50 +9,70 @@
 </head>
 
 <body>
-    <?php include __DIR__ . '/../templates/navbar/navbar.php'; ?>
+    <?php include __DIR__ . '/../templates/navbar/navbar.php';
+
+    $query = $_GET["q"] ?? null;
+    $reply = $_GET["reply"] ?? null;
+    $order = ($_GET["order"] ?? "desc") == "desc" ? true : false;
+
+    ?>
     <form action="" method="GET">
         <div class="search">
             <div class="search-group">
                 <input type="text" name="q" placeholder="Search something..." value="<?= $_GET["q"] ?? "" ?>" />
-                <button type="submit">Search</button>
-            </div>
-            <div class="radio-selector">
-                <div class="radio-group">
-                    <input type="radio" name="order" value="desc" id="desc" checked />
-                    <label for="desc">Newest</label>
+                <div class="radio-selector">
+                    <div class="radio-group">
+                        <input type="radio" name="order" value="desc" id="desc" <?= $order ? "checked" : "" ?> />
+                        <label for="desc">Newest</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" name="order" value="asc" id="asc" <?= $order ? "" : "checked" ?> />
+                        <label for="asc">Oldest</label>
+                    </div>
                 </div>
-                <div class="radio-group">
-                    <input type="radio" name="order" value="asc" id="asc" />
-                    <label for="asc">Oldest</label>
-                </div>
             </div>
+            <button type="submit">Search</button>
         </div>
     </form>
 
     <?php
-    $query = $_GET["q"] ?? "";
-    $order = ($_GET["order"] ?? "desc") == "desc" ? true : false;
 
     $posts = Post::get_all(
         $query,
         null,
         null,
-        null,
+        $reply,
         null,
         25,
         0,
         $order
     );
 
-    if (count($posts) == 0) {
+    if ($posts === 500) {
+        echo "<h1 class='error'>Internal server error</h1>";
+    } else if (count($posts) == 0) {
         echo "<h1 class='error'>No posts found</h1>";
     } else {
+        if ($reply !== null) {
+            $post = Post::get($reply);
+
+            if ($post === 500)
+                echo "<h1 class='error'>Internal server error</h1>";
+            else if ($post === 404)
+                echo "<h1 class='error'>Origin post not found</h1>";
+            else {
+                include __DIR__ . '/../templates/post/post.php';
+                echo "<h1 class='title'>Replies</h1>";
+            }
+        }
+
         foreach ($posts as $post) {
             include __DIR__ . '/../templates/post/post.php';
         }
     }
     ?>
 
+    <?php include __DIR__ . '/../templates/forms/postform.php'; ?>
 </body>
 
 </html>

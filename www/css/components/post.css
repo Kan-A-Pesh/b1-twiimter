@@ -1,0 +1,103 @@
+article.post {
+    background: #0001;
+    border-radius: 16px;
+    margin: 16px auto;
+
+    width: clamp(300px, 70vw, 550px);
+}
+
+article.post .header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: #0001;
+    gap: 16px;
+}
+
+article.post .header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+article.post .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+article.post .header a {
+    text-decoration: none;
+    color: var(--secondary);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+article.post .header a:hover {
+    color: var(--primary);
+}
+
+article.post .header span {
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+article.post .content {
+    padding: 16px;
+}
+
+article.post .content p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+article.post a {
+    text-decoration: none;
+    color: var(--secondary);
+}
+
+article.post a:hover {
+    color: var(--primary);
+}
+
+article.post .content img {
+    border-radius: 8px;
+}
+
+article.post .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+    background-color: #0001;
+    gap: 16px;
+}
+
+article.post .actions .input-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+article.post .actions .input-group input {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 18px;
+    width: auto;
+    cursor: pointer;
+    background-color: #0001;
+}
+
+article.post .actions .input-group input:hover {
+    background-color: #0002;
+}
+
+@media screen and (max-width: 768px) {
+    article.post .actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

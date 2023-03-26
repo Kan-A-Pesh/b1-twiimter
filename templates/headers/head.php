@@ -27,3 +27,4 @@
 <title>Hawk out</title>
 
 <link rel="stylesheet" href="/css/root.css">
+<script src="/js/root.js" defer></script>

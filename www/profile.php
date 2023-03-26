@@ -42,8 +42,10 @@ if (!empty($_GET["u"])) {
 
     </div>
     <div class="info">
-        <h1><?= $user->display_name ?></h1>
-        <h2>@<?= $user->handle ?></h2>
+        <div class="names">
+            <h1><?= $user->display_name ?></h1>
+            <h2>@<?= $user->handle ?></h2>
+        </div>
         <?php if ($_AUTH !== null && $_AUTH["user"]->handle === $user->handle) : ?>
             <a href="/settings" class="button">Edit profile</a>
         <?php endif; ?>
@@ -70,7 +72,7 @@ if (!empty($_GET["u"])) {
             echo '<h1 class="error">No posts found</h1>';
         } else {
             foreach ($posts as $post) {
-                include __DIR__ . '/../templates/post.php';
+                include __DIR__ . '/../templates/post/post.php';
             }
         }
         ?>

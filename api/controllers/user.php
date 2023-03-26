@@ -9,7 +9,6 @@ class User
     public string $biography;
     public string $avatar_path;
     public string $banner_path;
-    public DateTime $created_at;
 
     public function __construct(string $handle)
     {
@@ -75,7 +74,6 @@ class User
             $user->biography = "";
             $user->avatar_path = "";
             $user->banner_path = "";
-            $user->created_at = new DateTime();
 
             return $user;
         } catch (PDOException $e) {
@@ -147,7 +145,6 @@ class User
             $user->biography = $result["biography"] ?? "";
             $user->avatar_path = $result["avatar_path"] ?? "";
             $user->banner_path = $result["banner_path"] ?? "";
-            $user->created_at = new DateTime($result["created_at"]);
 
             // Return user
             return $user;
@@ -200,7 +197,6 @@ class User
                 $user->biography = $result["biography"];
                 $user->avatar_path = $result["avatar_path"];
                 $user->banner_path = $result["banner_path"];
-                $user->created_at = new DateTime($result["created_at"]);
 
                 $users[] = $user;
             }

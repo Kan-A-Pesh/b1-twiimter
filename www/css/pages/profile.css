@@ -30,7 +30,7 @@
     object-fit: cover;
 }
 
-.info {
+.info, .info>.names {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -41,6 +41,7 @@
 .info h1 {
     font-size: 1.75rem;
     font-weight: 600;
+    margin: 0 8px;
 }
 
 .info h2 {
@@ -62,4 +63,15 @@
 .bio p {
     font-size: 1rem;
     font-weight: 500;
+}
+
+.info, .bio, .confirm-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+    .info>.names {
+        flex-direction: row;
+    }
 }

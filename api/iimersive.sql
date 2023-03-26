@@ -36,34 +36,6 @@ CREATE TABLE `likes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `messages`
---
-
-CREATE TABLE `messages` (
-  `PK_message_id` varchar(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `FK_author_handle` varchar(15) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `FK_recipient_handle` varchar(15) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `notifications`
---
-
-CREATE TABLE `notifications` (
-  `PK_notification_id` varchar(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `FK_recipient_handle` varchar(15) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `icon_path` varchar(20) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `posts`
 --
 
@@ -106,8 +78,7 @@ CREATE TABLE `users` (
   `passhash` text CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `biography` text,
   `avatar_path` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
-  `banner_path` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `banner_path` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -120,21 +91,6 @@ CREATE TABLE `users` (
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`PFK_post_id`,`PFK_user_handle`),
   ADD KEY `C_likes_user_handle` (`PFK_user_handle`);
-
---
--- Index pour la table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`PK_message_id`),
-  ADD KEY `C_message_author_handle` (`FK_author_handle`),
-  ADD KEY `C_message_recipient_handle` (`FK_recipient_handle`);
-
---
--- Index pour la table `notifications`
---
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`PK_notification_id`),
-  ADD KEY `C_recipient_handle` (`FK_recipient_handle`);
 
 --
 -- Index pour la table `posts`
@@ -168,19 +124,6 @@ ALTER TABLE `users`
 ALTER TABLE `likes`
   ADD CONSTRAINT `C_likes_post_id` FOREIGN KEY (`PFK_post_id`) REFERENCES `posts` (`PK_post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `C_likes_user_handle` FOREIGN KEY (`PFK_user_handle`) REFERENCES `users` (`PK_user_handle`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `messages`
---
-ALTER TABLE `messages`
-  ADD CONSTRAINT `C_message_author_handle` FOREIGN KEY (`FK_author_handle`) REFERENCES `users` (`PK_user_handle`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `C_message_recipient_handle` FOREIGN KEY (`FK_recipient_handle`) REFERENCES `users` (`PK_user_handle`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `C_recipient_handle` FOREIGN KEY (`FK_recipient_handle`) REFERENCES `users` (`PK_user_handle`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`

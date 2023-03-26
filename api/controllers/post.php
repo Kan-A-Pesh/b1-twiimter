@@ -4,7 +4,7 @@ class Post
 {
     public string $id;
     public ?string $reply_to;
-    public string $author_handle;
+    public User $author;
     public int $tag;
     public string $content;
     public ?array $media_paths;
@@ -71,11 +71,12 @@ class Post
      */
     public static function get(string $id): Post|int
     {
-        global $MYSQL_POST_TABLE;
+        global $MYSQL_POST_TABLE, $MYSQL_USER_TABLE;
 
         try {
             $stmt = Database::$pdo->prepare(
                 "SELECT * FROM $MYSQL_POST_TABLE
+                INNER JOIN $MYSQL_USER_TABLE ON FK_author_handle = PK_user_handle
                 WHERE PK_post_id = :id"
             );
 
@@ -87,9 +88,16 @@ class Post
             if ($row === false)
                 return 404;
 
+            $author = new User($row["PK_user_handle"]);
+            $author->display_name = $row["display_name"];
+            $author->email = $row["email"];
+            $author->biography = $row["biography"] ?? "";
+            $author->avatar_path = $row["avatar_path"] ?? "";
+            $author->banner_path = $row["banner_path"] ?? "";
+
             $post = new Post($row["PK_post_id"]);
             $post->reply_to = $row["FK_reply_to"];
-            $post->author_handle = $row["FK_author_handle"];
+            $post->author = $author;
             $post->tag = $row["tag"];
             $post->content = $row["content"];
             $post->views = $row["views_count"];
@@ -98,6 +106,7 @@ class Post
 
             return $post;
         } catch (PDOException $e) {
+            echo $e->getMessage();
             return 500;
         }
     }
@@ -125,7 +134,7 @@ class Post
         int $offset = 0,
         bool $orderDesc = true
     ): array|int {
-        global $MYSQL_POST_TABLE;
+        global $MYSQL_POST_TABLE, $MYSQL_USER_TABLE;
 
         $query = $query ? "%$query%" : null;
         $hasMedia = $hasMedia !== null ? ($hasMedia ? "NOT" : "") : null;
@@ -139,13 +148,14 @@ class Post
             $replyToQuery = "AND FK_reply_to IS NOT NULL";
         } else {
             $replyToQuery = $replyTo ?
-                "AND FK_reply_to = $replyTo" :
+                "AND FK_reply_to = :replyTo" :
                 null;
         }
 
         try {
             $stmt = Database::$pdo->prepare(
                 "SELECT * FROM $MYSQL_POST_TABLE
+                INNER JOIN $MYSQL_USER_TABLE ON FK_author_handle = PK_user_handle
                 WHERE (:query IS NULL OR content LIKE :query)
                 AND (:fromUsers IS NULL OR FK_author_handle = :fromUsers)
                 AND (:excludeUsers IS NULL OR FK_author_handle != :excludeUsers)
@@ -158,6 +168,10 @@ class Post
             $stmt->bindParam(":query", $query);
             $stmt->bindParam(":fromUsers", $fromUsersQuery);
             $stmt->bindParam(":excludeUsers", $excludeUsersQuery);
+
+            if (isset($replyToQuery))
+                $stmt->bindParam(":replyTo", $replyTo);
+
             $stmt->bindParam(":hasMedia", $hasMedia);
             $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
             $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
@@ -165,9 +179,16 @@ class Post
 
             $posts = [];
             while ($row = $stmt->fetch()) {
+                $author = new User($row["FK_author_handle"]);
+                $author->display_name = $row["display_name"];
+                $author->email = $row["email"];
+                $author->biography = $row["biography"] ?? "";
+                $author->avatar_path = $row["avatar_path"] ?? "";
+                $author->banner_path = $row["banner_path"] ?? "";
+
                 $post = new Post($row["PK_post_id"]);
                 $post->reply_to = $row["FK_reply_to"];
-                $post->author_handle = $row["FK_author_handle"];
+                $post->author = $author;
                 $post->tag = $row["tag"];
                 $post->content = $row["content"];
                 $post->views = $row["views_count"];
@@ -190,6 +211,7 @@ class Post
 
             return $posts;
         } catch (PDOException $e) {
+            echo $e->getMessage();
             return 500;
         }
     }
@@ -233,6 +255,7 @@ class Post
 
             return self::get(Database::$pdo->lastInsertId());
         } catch (PDOException $e) {
+            echo $e->getMessage();
             return 500;
         }
     }

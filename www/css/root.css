@@ -2,6 +2,7 @@
 @import url("/css/components/navbar.css");
 @import url("/css/components/inputs.css");
 @import url("/css/components/modal.css");
+@import url("/css/components/post.css");
 
 :root {
     --primary: #25ca2d;

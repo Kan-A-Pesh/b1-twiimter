@@ -17,7 +17,5 @@ include_once(__DIR__ . "/controllers/medias.php");
 include_once(__DIR__ . "/controllers/user.php");
 include_once(__DIR__ . "/controllers/post.php");
 include_once(__DIR__ . "/controllers/session.php");
-include_once(__DIR__ . "/controllers/message.php");
-include_once(__DIR__ . "/controllers/notification.php");
 
 include_once(__DIR__ . "/middlewares/auth.php");
